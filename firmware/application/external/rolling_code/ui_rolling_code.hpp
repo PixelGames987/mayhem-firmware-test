@@ -68,6 +68,18 @@ class RollingCodeView : public View {
         "rx_rolling_code", app_settings::Mode::RX
     };
 
+    const std::vector<rf::Frequency> common_gate_frequencies = {
+        315000000,   // 315 MHz (US)
+        390000000,   // 390 MHz
+        433920000,   // 433.92 MHz (EU/Asia) 
+        868000000,   // 868 MHz (EU)
+        315550000,   // 315.55 MHz  
+        433050000,   // 433.05 MHz
+        433230000    // 433.23 MHz
+    };
+
+    size_t current_freq_index = 2; // Default to 433.92MHz
+
     void on_capture();
     void on_save();
     void on_load();
@@ -75,12 +87,15 @@ class RollingCodeView : public View {
     void on_prev();
     void on_next(); 
     void on_clear();
+    void on_auto_scan();
     void update_display();
     void simulate_capture();  // For testing
+    void update_freq_preset_text();
     
     std::vector<RollingCodeEntry> captured_codes_;
     size_t current_code_index_ = 0;
     bool is_capturing_ = false;
+    bool is_auto_scanning_ = false;
 
     Labels labels{
         {{0 * 8, 0 * 16}, "Rolling Code v1.0", Color::light_grey()},
@@ -142,6 +157,16 @@ class RollingCodeView : public View {
     Button button_clear{
         {12 * 8, 14 * 16, 5 * 8, 2 * 16},
         "Clear"
+    };
+
+    Button button_auto{
+        {11 * 8, 10 * 16, 6 * 8, 1 * 16},
+        "Auto"
+    };
+
+    Button button_freq_preset{
+        {0 * 8, 10 * 16, 10 * 8, 1 * 16},
+        "433.92MHz"
     };
 
     Button button_exit{
