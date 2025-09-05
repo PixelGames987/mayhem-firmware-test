@@ -23,6 +23,7 @@
 #include "baseband_api.hpp"
 #include "string_format.hpp"
 #include "file_path.hpp"
+#include "ch.h"
 
 using namespace portapack;
 
