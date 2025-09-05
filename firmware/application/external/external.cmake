@@ -249,6 +249,10 @@ set(EXTCPPSRC
 	#game2048
 	external/game2048/main.cpp
 	external/game2048/ui_game2048.cpp
+
+	#rolling_code
+	external/rolling_code/main.cpp
+	external/rolling_code/ui_rolling_code.cpp
 )
 
 set(EXTAPPLIST
@@ -312,4 +316,5 @@ set(EXTAPPLIST
 	epirb_rx
 	soundboard
 	game2048
+	rolling_code
 )
